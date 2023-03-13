@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { ElvenJS } from './elven-js/main';
-import { LoginMethodsEnum } from './elven-js/types';
+import {Component, OnInit} from '@angular/core';
+import {ElvenJS} from './elven-js/main';
+import {LoginMethodsEnum} from './elven-js/types';
 import {base64ToDecimalHex} from './helpers';
 import {Address} from '@multiversx/sdk-core/out/address';
 import {ContractFunction} from '@multiversx/sdk-core/out';
@@ -16,32 +16,32 @@ export class AppComponent implements OnInit {
   loggedIn: boolean = false;
 
   ngOnInit(): void {
-    const initElven = async () => {
-      await ElvenJS.init(
-        {
-          apiUrl: 'https://devnet-api.multiversx.com',
-          chainType: 'devnet',
-          apiTimeout: 10000,
+    this.setupElven();
+  }
 
-          // TODO Replace this with your own project id
-          walletConnectV2ProjectId: 'dbf66ff0813b5425b3063e404c9ba79e6',
+  async setupElven() {
+    await ElvenJS.init(
+      {
+        apiUrl: 'https://devnet-api.multiversx.com',
+        chainType: 'devnet',
+        apiTimeout: 10000,
 
-          walletConnectV2RelayAddresses: ['wss://relay.walletconnect.com'],
-          onLoginPending: () => {
-            this.isLoading = true
-          },
-          onLoggedIn: () => {
-            this.loggedIn = true;
-            this.isLoading = false;
-          },
-          onLogout: () => {
-            this.loggedIn = false;
-          }
+        // TODO Replace this with your own project id
+        walletConnectV2ProjectId: 'dbf66ff0813b5425b3063e404c9ba79e6',
+
+        walletConnectV2RelayAddresses: ['wss://relay.walletconnect.com'],
+        onLoginPending: () => {
+          this.isLoading = true
+        },
+        onLoggedIn: () => {
+          this.loggedIn = true;
+          this.isLoading = false;
+        },
+        onLogout: () => {
+          this.loggedIn = false;
         }
-      );
-    }
-
-    initElven();
+      }
+    );
   }
 
   async queryContract() {
