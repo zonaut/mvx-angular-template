@@ -17,6 +17,10 @@
   <div *ngIf="!loggedIn">
     <p>Not logged in</p>
   </div>
+
+  <p *ngFor="let alert of alerts">
+    <ngb-alert [type]="alert.type" (closed)="closeAlert(alert)">{{ alert.message }}</ngb-alert>
+  </p>
 </div>
 
 <router-outlet></router-outlet>

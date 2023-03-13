@@ -4,6 +4,7 @@ import {LoginMethodsEnum} from './elven-js/types';
 import {base64ToDecimalHex} from './helpers';
 import {Address} from '@multiversx/sdk-core/out/address';
 import {ContractFunction} from '@multiversx/sdk-core/out';
+import {Alert} from './shared/alert';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +15,7 @@ export class AppComponent implements OnInit {
 
   isLoading: boolean = false;
   loggedIn: boolean = false;
+  alerts: Alert[] = [];
 
   ngOnInit(): void {
     this.setupElven();
@@ -57,7 +59,10 @@ export class AppComponent implements OnInit {
 
       // Manual decoding of a simple type (number here), this should be done with an ABI
       const hexVal = base64ToDecimalHex(results?.returnData?.[0]);
-      window.alert(`➡️ The result of the query is: ${parseInt(hexVal, 16)}`);
+      this.alerts.push({
+        type: 'success',
+        message: `➡️ The result of the query is: ${parseInt(hexVal, 16)}`,
+      });
     } catch (e: any) {
       this.isLoading = false;
       throw new Error(e?.message);
@@ -82,5 +87,9 @@ export class AppComponent implements OnInit {
     } catch (e: any) {
       console.error(e.message);
     }
+  }
+
+  closeAlert(alert: Alert) {
+    this.alerts.splice(this.alerts.indexOf(alert), 1);
   }
 }
