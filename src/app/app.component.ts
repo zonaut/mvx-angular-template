@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ElvenJS } from './elven-js/main';
 import { LoginMethodsEnum } from './elven-js/types';
+import {base64ToDecimalHex} from './helpers';
+import {Address} from '@multiversx/sdk-core/out/address';
+import {ContractFunction} from '@multiversx/sdk-core/out';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +12,7 @@ import { LoginMethodsEnum } from './elven-js/types';
 })
 export class AppComponent implements OnInit {
 
-  isVisible: boolean = false;
+  isLoading: boolean = false;
   loggedIn: boolean = false;
 
   ngOnInit(): void {
@@ -25,11 +28,11 @@ export class AppComponent implements OnInit {
 
           walletConnectV2RelayAddresses: ['wss://relay.walletconnect.com'],
           onLoginPending: () => {
-            this.isVisible = true
+            this.isLoading = true
           },
           onLoggedIn: () => {
             this.loggedIn = true;
-            this.isVisible = false;
+            this.isLoading = false;
           },
           onLogout: () => {
             this.loggedIn = false;
@@ -39,6 +42,26 @@ export class AppComponent implements OnInit {
     }
 
     initElven();
+  }
+
+  async queryContract() {
+    try {
+      this.isLoading = true;
+      const results = await ElvenJS.queryContract({
+        address: new Address('erd1qqqqqqqqqqqqqpgq4kuutm0n9r9p7kyez2dh8ta58jfrucg8x8fqm5kp79'),
+        func: new ContractFunction('countView'),
+        args: []
+      });
+
+      this.isLoading = false;
+
+      // Manual decoding of a simple type (number here), this should be done with an ABI
+      const hexVal = base64ToDecimalHex(results?.returnData?.[0]);
+      window.alert(`➡️ The result of the query is: ${parseInt(hexVal, 16)}`);
+    } catch (e: any) {
+      this.isLoading = false;
+      throw new Error(e?.message);
+    }
   }
 
   async loginWithWebWallet() {
