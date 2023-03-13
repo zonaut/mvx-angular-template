@@ -1,0 +1,21 @@
+<div class="overlay" [class.visible]="isVisible">
+  <div class="loader">Loading...</div>
+</div>
+
+<div class="container">
+  <div class="header" id="header">
+    <button class="button" (click)="loginWithWebWallet()" *ngIf="!loggedIn">Login with Web Wallet</button>
+
+    <button class="button right" (click)="logout()" *ngIf="loggedIn">Logout</button>
+  </div>
+
+  <div *ngIf="loggedIn">
+    <p>Logged in</p>
+  </div>
+
+  <div *ngIf="!loggedIn">
+    <p>Not logged in</p>
+  </div>
+</div>
+
+<router-outlet></router-outlet>

@@ -1,1 +1,0 @@
-# mvx-angular-template

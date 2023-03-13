@@ -1,0 +1,218 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* Importing Bootstrap SCSS file. */
+@import 'bootstrap/scss/bootstrap';
+
+body {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+body * {
+  box-sizing: border-box;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.button {
+  padding: 10px 15px;
+  color: #fff;
+  background-color: #0f172a;
+  border: 0;
+  text-align: center;
+  font-size: 16px;
+  margin: 10px;
+  cursor: pointer;
+  border-radius: 8px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.button.right {
+  margin-left: auto;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px dashed #000;
+  padding-bottom: 20px;
+}
+
+a {
+  color: #000;
+  font-size: 15px;
+  font-weight: bold;
+  max-width: 100%;
+  display: inline-block;
+}
+
+.tx-hash-or-query-result {
+  font-size: 16px;
+  font-weight: bold;
+  word-break: break-all;
+}
+
+@media screen and (max-width: 680px) {
+  .header {
+    flex-direction: column;
+  }
+
+  .button {
+    width: 100%;
+  }
+
+  .button.right {
+    margin-left: 10px;
+  }
+}
+
+.esdt-info {
+  margin-top: 10px;
+}
+
+.esdt-info:nth-child(3) {
+  margin-bottom: 30px;
+}
+
+.esdt-info,
+.esdt-info a {
+  font-size: 13px;
+}
+
+.overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, .6);
+  justify-content: center;
+  align-items: center;
+}
+
+.overlay.visible {
+  display: flex;
+}
+
+/* SPINNER */
+/* https://projects.lukehaas.me/css-loaders/ */
+
+.loader,
+.loader:after {
+  border-radius: 50%;
+  width: 10em;
+  height: 10em;
+}
+
+.loader {
+  font-size: 10px;
+  position: relative;
+  text-indent: -9999em;
+  border-top: 1.1em solid rgba(255, 255, 255, 0.2);
+  border-right: 1.1em solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1.1em solid rgba(255, 255, 255, 0.2);
+  border-left: 1.1em solid #ffffff;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-animation: load8 1.1s infinite linear;
+  animation: load8 1.1s infinite linear;
+}
+
+@-webkit-keyframes load8 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes load8 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+/* Elven.js QR code styles - by default it isn't styled, but you can use these styles or custom ones in your app */
+
+.qr-code-container {
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0px 0px 26px -8px rgba(66, 68, 90, 0.43);
+  margin: 0 auto;
+  text-align: center;
+}
+
+.qr-code-container .elven-qr-code-deep-link {
+  margin-bottom: 24px;
+  font-size: 16px;
+  display: inline-block;
+  background-color: #000;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+}
+
+/* Elven.js pairings styles - by default it isn't styled, but you can use these styles or custom ones in your app */
+
+.elven-wc-pairings {
+  padding-bottom: 20px;
+}
+
+.elven-wc-pairings-header {
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.elven-wc-pairing-item {
+  padding: 20px 10px;
+  border: 1px dashed black;
+  margin-bottom: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 90%;
+  cursor: pointer;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.elven-wc-pairings-remove-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  background-color: #0f172a;
+  color: white;
+  float: right;
+  border: 0;
+  border-radius: 100%;
+  cursor: pointer;
+  line-height: 1;
+  font-size: 14px;
+}
+
+.elven-wc-pairing-item-description {
+  text-align: left;
+}
+
+.elven-wc-pairing-item-confirm-msessage {
+  margin-bottom: 10px;
+}

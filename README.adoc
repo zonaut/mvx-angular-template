@@ -1,0 +1,50 @@
+= MVX Angular template
+
+This example uses the https://github.com/juliancwirko/elven.js sources.
+
+Big thanks to https://github.com/juliancwirko for the research done on this already !!!
+
+== Run
+
+    npm install
+    ng serve
+
+== Possible todos
+
+* all other options without using the web wallet
+* create an Angular lib?
+
+== Preparation steps that where needed to make it work
+
+The following dependencies are needed
+
+* @walletconnect/types can probably be removed in future?
+
+
+    npm install --save-dev \
+      @multiversx/sdk-core \
+      @multiversx/sdk-extension-provider \
+      @multiversx/sdk-network-providers \
+      @multiversx/sdk-wallet-connect-provider \
+      @multiversx/sdk-web-wallet-provider \
+      @multiversx/sdk-core \
+      bn.js @types/bn.js \
+      qrcode @types/qrcode \
+      buffer \
+      @walletconnect/types
+
+add to tsconfig.json
+
+    "allowSyntheticDefaultImports": true,
+
+add a polyfills.ts under source with
+
+    import 'zone.js';
+    import { Buffer } from 'buffer';
+
+    (window as any).global = window;
+    window.Buffer = Buffer;
+
+* add 'polyfills.ts' to angular.json under polyfills
+* add 'polyfills.ts' to tsconfig.app.json and tsconfig.spec.json under files
+
