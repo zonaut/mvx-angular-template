@@ -4,6 +4,10 @@ This example uses the https://github.com/juliancwirko/elven.js sources.
 
 Big thanks to https://github.com/juliancwirko for the research done on this already !!!
 
+== Wallet connect project id
+
+Go to https://cloud.walletconnect.com/ and create your own projectId and replace it in AppComponent
+
 == Run
 
     npm install
@@ -27,7 +31,6 @@ The following dependencies are needed
       @multiversx/sdk-network-providers \
       @multiversx/sdk-wallet-connect-provider \
       @multiversx/sdk-web-wallet-provider \
-      @multiversx/sdk-core \
       bn.js @types/bn.js \
       qrcode @types/qrcode \
       buffer \
