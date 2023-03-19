@@ -8,3 +8,10 @@ export const base64ToDecimalHex = (str: any) => {
 
   return result.toUpperCase();
 };
+
+export const clearQrCodeContainer = () => {
+  const qrContainer = document.querySelector('#qr-code-container');
+  if (qrContainer && qrContainer?.childNodes?.length > 0) {
+    qrContainer?.replaceChildren();
+  }
+};

@@ -5,6 +5,8 @@
 <div class="container">
   <div class="header" id="header">
     <button class="button" (click)="loginWithWebWallet()" *ngIf="!loggedIn">Login with Web Wallet</button>
+    <button class="button" (click)="loginWithXPortal()" *ngIf="!loggedIn">Login with mobile</button>
+
     <button class="button" (click)="queryContract()">Query countView</button>
 
     <button class="button right" (click)="logout()" *ngIf="loggedIn">Logout</button>
@@ -16,6 +18,7 @@
 
   <div *ngIf="!loggedIn">
     <p>Not logged in</p>
+    <div id="qr-code-container" class="qr-code-container"></div>
   </div>
 
   <p *ngFor="let alert of alerts">

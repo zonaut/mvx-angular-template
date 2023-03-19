@@ -1,10 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {ElvenJS} from './elven-js/main';
-import {LoginMethodsEnum} from './elven-js/types';
-import {base64ToDecimalHex} from './helpers';
-import {Address} from '@multiversx/sdk-core/out/address';
-import {ContractFunction} from '@multiversx/sdk-core/out';
-import {Alert} from './shared/alert';
+import { Component, OnInit } from '@angular/core';
+import { ElvenJS } from './elven-js/main';
+import { LoginMethodsEnum } from './elven-js/types';
+import { base64ToDecimalHex, clearQrCodeContainer } from './helpers';
+import { Address } from '@multiversx/sdk-core/out/address';
+import { ContractFunction } from '@multiversx/sdk-core/out';
+import { Alert } from './shared/alert';
 
 @Component({
   selector: 'app-root',
@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
         apiTimeout: 10000,
 
         // TODO Replace this with your own project id
-        walletConnectV2ProjectId: 'dbf66ff0813b5425b3063e404c9ba79e6',
+        walletConnectV2ProjectId: 'dbf66ff0813b5425b3063e404c9ba79e',
 
         walletConnectV2RelayAddresses: ['wss://relay.walletconnect.com'],
         onLoginPending: () => {
@@ -41,7 +41,14 @@ export class AppComponent implements OnInit {
         },
         onLogout: () => {
           this.loggedIn = false;
-        }
+          this.isLoading = false;
+        },
+        onQrPending: () => {
+          this.isLoading = true;
+        },
+        onQrLoaded: () => {
+          this.isLoading = false;
+        },
       }
     );
   }
@@ -73,6 +80,21 @@ export class AppComponent implements OnInit {
     try {
       await ElvenJS.login(LoginMethodsEnum.webWallet, {
         callbackRoute: '/',
+        // The token is optional, but without it you won't get the signature back, if you don't need it you can omit passing it
+        token: 'your_token_here'
+      });
+    } catch (e: any) {
+      console.log('Login: Something went wrong, try again!', e?.message);
+    }
+  }
+
+  async loginWithXPortal() {
+    clearQrCodeContainer();
+    try {
+      await ElvenJS.login(LoginMethodsEnum.mobile, {
+        // You can also use the DOM element here:
+        // qrCodeContainer: document.querySelector('#qr-code-container')
+        qrCodeContainer: 'qr-code-container',
         // The token is optional, but without it you won't get the signature back, if you don't need it you can omit passing it
         token: 'your_token_here'
       });
